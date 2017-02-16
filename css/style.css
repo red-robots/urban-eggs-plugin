@@ -1,0 +1,30 @@
+.egg-total {
+	width: auto;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+.egg-total h3 {
+	font-size: 30px;
+}
+.day {
+	background-color: #fff;
+	border-bottom: 3px solid #ccc;
+	width: 60%;
+	padding: 20px;
+	margin-bottom: 20px;
+	position: relative;
+}
+.day h2 {
+	margin: 0 0 20px 0;
+}
+.the-sale {
+	width: auto;
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+	font-size: 18px;
+	padding: 10px;
+	background-color: #333;
+	color: #fff;
+}
