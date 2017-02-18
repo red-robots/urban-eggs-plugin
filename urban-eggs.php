@@ -46,6 +46,7 @@ require_once ('inc/metaboxes-collected.php');
 require_once ('inc/metaboxes-orders.php');
 require_once ('inc/filters.php');
 require_once ('inc/post-types.php');
+require_once ('admin/orders.php');
 
 
 

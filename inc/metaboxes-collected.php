@@ -1,16 +1,16 @@
 <?php 
 
 // Add the Meta Box
-function add_custom_meta_box() {
+function urbegg_add_custom_meta_box() {
     add_meta_box(
         'custom_meta_box', // $id
         'Egg Collection Information', // $title 
-        'egg_show_custom_meta_box', // $callback
+        'urbegg_show_custom_meta_box', // $callback
         'egg', // $page
         'egghigh', // $context
         'high'); // $priority
 }
-add_action('add_meta_boxes', 'add_custom_meta_box');
+add_action('add_meta_boxes', 'urbegg_add_custom_meta_box');
 
 
 // Field Array
@@ -78,7 +78,7 @@ add_action('edit_form_after_title', 'urbegg_move_deck');
 
 
 // The Callback
-function egg_show_custom_meta_box() {
+function urbegg_show_custom_meta_box() {
 global $custom_meta_fields, $post;
 // Use nonce for verification
 wp_nonce_field( basename( __FILE__ ), 'num_eggs_nonce' );
@@ -117,7 +117,7 @@ wp_nonce_field( basename( __FILE__ ), 'num_eggs_nonce' );
 
 
 // Save the Data
-function save_custom_meta($post_id) {
+function urbegg_save_custom_meta($post_id) {
     global $custom_meta_fields;
      
     /* Verify the nonce before proceeding. */
@@ -145,4 +145,4 @@ function save_custom_meta($post_id) {
         }
     } // end foreach
 }
-add_action('save_post', 'save_custom_meta');
+add_action('save_post', 'urbegg_save_custom_meta');
