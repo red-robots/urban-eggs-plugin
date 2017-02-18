@@ -4,9 +4,9 @@
 	Sortable Columns
 -------------------------------------------------------------------------------*/
 
-add_filter( 'manage_edit-order_columns', 'my_edit_order_columns' ) ;
+add_filter( 'manage_edit-order_columns', 'urbegg_edit_order_columns' ) ;
 
-function my_edit_order_columns( $columns ) {
+function urbegg_edit_order_columns( $columns ) {
 
 	$columns = array(
 		'cb' => '<input type="checkbox" />',
@@ -19,9 +19,9 @@ function my_edit_order_columns( $columns ) {
 	return $columns;
 }
 
-add_action( 'manage_order_posts_custom_column', 'my_manage_order_columns', 10, 2 );
+add_action( 'manage_order_posts_custom_column', 'urbegg_manage_order_columns', 10, 2 );
 
-function my_manage_order_columns( $column ) {
+function urbegg_manage_order_columns( $column ) {
 	
 	global $post;
 	$id = get_the_ID();
@@ -53,42 +53,42 @@ function my_manage_order_columns( $column ) {
 	Sortable Columns
 -------------------------------------------------------------------------------*/
 
-function my_column_register_sortable( $columns )
+function urbegg_column_register_sortable( $columns )
 {
 	// $columns['name'] = 'name';
 	$columns = array(
-		'name' => 'name',
-		'credit' => 'credit',
-		'owe' => 'owe'
+		'name' => 'order_name',
+		'credit' => 'order_credit',
+		'owe' => 'order_owe'
 	);
 	return $columns;
 }
 
-add_filter("manage_edit-order_sortable_columns", "my_column_register_sortable" );
+add_filter("manage_edit-order_sortable_columns", "urbegg_column_register_sortable" );
 
 
 /* Only run our customization on the 'edit.php' page in the admin. */
-add_action( 'load-edit.php', 'my_edit_order_load' );
+add_action( 'load-edit.php', 'urbegg_edit_order_load' );
 
-function my_edit_order_load() {
-	add_filter( 'request', 'my_sort_order' );
+function urbegg_edit_order_load() {
+	add_filter( 'request', 'urbegg_sort_order' );
 }
 
-/* Sorts the movies. */
-function my_sort_order( $vars ) {
+/* Sorts the Orders. */
+function urbegg_sort_order( $vars ) {
 
-	/* Check if we're viewing the 'movie' post type. */
+	/* Check if we're viewing the 'order' post type. */
 	if ( isset( $vars['post_type'] ) && 'order' == $vars['post_type'] ) {
 
 		/* Check if 'orderby' is set to 'duration'. */
-		if ( isset( $vars['orderby'] ) && 'name' == $vars['orderby'] ) {
+		if ( isset( $vars['orderby'] ) && 'order_name' == $vars['orderby'] ) {
 
 			/* Merge the query vars with our custom variables. */
 			$vars = array_merge(
 				$vars,
 				array(
 					'meta_key' => 'order_name',
-					'orderby' => 'meta_value_num'
+					'orderby' => 'meta_value'
 				)
 			);
 		}
